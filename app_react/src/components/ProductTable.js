@@ -1,7 +1,9 @@
 import React from "react";
-import {Table,Container} from 'react-bootstrap';
+import {Table,Container,Button } from 'react-bootstrap';
 
-export default function ProductTable() {
+export default function ProductTable(props) {
+  const {openModalDelete} = props;
+
   return (
     <Container className="mt-4">
       <Table striped bordered hover size="sm">
@@ -18,7 +20,11 @@ export default function ProductTable() {
             <td>1</td>
             <td>Mark</td>
             <td>Otto</td>
-            <td>@mdo</td>
+            <td>
+              <Button variant="primary" onClick={openModalDelete}>
+                Delete
+              </Button>
+            </td>
           </tr>
         </tbody>
       </Table>
