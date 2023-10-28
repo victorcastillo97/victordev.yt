@@ -20,7 +20,6 @@ export default function ModalForm(props) {
         </Modal.Header>
         <Form>
             <Modal.Body>
-            
                 <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
                     <Form.Label column sm={2}> Name </Form.Label>
                     <Col sm={10}>
@@ -29,14 +28,14 @@ export default function ModalForm(props) {
                 </Form.Group>
 
                 <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
-                    <Form.Label column sm={2}> Cantidad </Form.Label>
+                    <Form.Label column sm={2}> Quantity </Form.Label>
                     <Col sm={10}>
                         <Form.Control type="number" placeholder="Name of product" />
                     </Col>
                 </Form.Group>
 
                 <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
-                    <Form.Label column sm={2}> Precio </Form.Label>
+                    <Form.Label column sm={2}> Price </Form.Label>
                     <Col sm={10}>
                         <Form.Control type="number" placeholder="Name of product" />
                     </Col>
