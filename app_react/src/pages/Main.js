@@ -10,23 +10,41 @@ export default function Main(){
     const [showModalAddProduct, setShowModalAddProduct] = useState(false);
     const [showModalUpdateProduct, setShowModalUpdateProduct] = useState(false);
     
-    const [showModalForm, setShowModalForm] = useState(false);
     const [products, setProducts] = useState([]);
+    const [selectedProduct, setSelectedProduct] = useState(null); 
+    const [showModalForm, setShowModalForm] = useState(false);
+    const [cont, setCont] = useState(0);
 
-    const addProdut = (product) =>{
-        setProducts([...products, product]);
+    const addProduct = (product) =>{
+        setProducts([...products, {...product, "id": cont}]);
+        setCont(cont + 1);
+    };
+
+    const seeDeletingProduct = (product) => {
+        setSelectedProduct(product);
+        setShowModalDelete(true);
+    };
+
+    const seeUpdatingProduct = (product) => {
+        setSelectedProduct(product);
+        setShowModalForm(true);
+    };
+
+    const deleteProduct = () => {
+        setProducts(products.filter(product => product.id !== selectedProduct.id));
+        setShowModalDelete(false);
+        setSelectedProduct(null);
     };
 
     return(
         <>
             <Header/>
             <ActionBar openModalForm={()=>setShowModalForm(true)}/>
-            <ProductTable openModalUpdateProduct={()=>setShowModalUpdateProduct(true)} openModalDelete={() => setShowModalDelete(true)}/>
-            <ModalConfirmation show={showModalDelete} onHide={() => setShowModalDelete(false)}/>
-            <ModalForm show={showModalForm} onHide={() => setShowModalForm(false)} onSubmit={addProdut}/>
+            <ProductTable products={products} openModalDelete={seeDeletingProduct} openModalUpdate={seeUpdatingProduct}/>
+            <ModalConfirmation show={showModalDelete} onHide={() => {setShowModalDelete(false); setSelectedProduct(null);}} onConfirmation={deleteProduct}/>
+            <ModalForm show={showModalForm} onHide={() => {setShowModalForm(false);setSelectedProduct(null);}} onSubmit={addProduct} productSelected={selectedProduct}/>
         </>
     )
     
-    //<ModalForm show={showModalAddProduct} onHide={() => setShowModalAddProduct(false)}/>
-    //<ModalForm show={showModalUpdateProduct} onHide={() => setShowModalUpdateProduct(false)}/>
+    
 }

@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {Button,Modal} from 'react-bootstrap';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
 export default function ModalForm(props) {
-  const {show, onHide, onSubmit} = props;
+  const {show, onHide, onSubmit, productSelected} = props;
   const [newProduct, setNewProduct] = useState({name: "", price: ""});
+ 
+  useEffect(()=>{
+    if(productSelected){
+      setNewProduct(productSelected);
+    }else{
+      setNewProduct({ name: "", price: "" });
+    }
+  },[show]);
 
   const handleFormChange = (e) => {
     setNewProduct({...newProduct, [e.target.name]: e.target.value});
@@ -14,8 +22,8 @@ export default function ModalForm(props) {
 
   const handleFormSubmit = () => {
     if(newProduct.name && newProduct.price){
-      console.log(newProduct)
-      onSubmit();
+      onSubmit(newProduct);
+      setNewProduct({ name: "", price: "" });
       onHide();
     }
   };

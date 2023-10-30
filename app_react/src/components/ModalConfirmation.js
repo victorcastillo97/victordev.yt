@@ -3,8 +3,6 @@ import {Button,Modal} from 'react-bootstrap';
 
 export default function ModalConfirmation(props) {
     return (
-        //<Modal show={show} onHide={handleClose}>
-        //<Button variant="secondary" onClick={handleClose}>
         <Modal show={props.show} onHide={props.onHide}>
             <Modal.Header >
                 <Modal.Title>Modal heading</Modal.Title>
@@ -14,7 +12,7 @@ export default function ModalConfirmation(props) {
                 <Button variant="secondary" onClick={props.onHide}>
                     Close
                 </Button>
-                <Button variant="primary">
+                <Button variant="primary" onClick={props.onConfirmation}>
                     Save Changes
                 </Button>
             </Modal.Footer>
